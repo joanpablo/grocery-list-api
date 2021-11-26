@@ -1,17 +1,18 @@
 package com.rideco.grocery.models;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.*;
 
 /**
  * Represents a Product.
  */
+@Entity
 public class Product {
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name = "id")
     private Integer id;
     private String name;
     private String description;
-
-    public Product() {}
 
     /**
      * Sets the ID of the product.
@@ -43,5 +44,21 @@ public class Product {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Sets the name of the product.
+     * @param name the new name of the product.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Sets the description of the product.
+     * @param description the new description of the product.
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

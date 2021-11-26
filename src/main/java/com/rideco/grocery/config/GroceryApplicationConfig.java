@@ -1,6 +1,7 @@
 package com.rideco.grocery.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.method.HandlerTypePredicate;
@@ -8,9 +9,10 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+@Configuration
 public class GroceryApplicationConfig implements WebMvcConfigurer {
 
-    private Environment env;
+    private final Environment env;
 
     @Autowired
     GroceryApplicationConfig(Environment env) {

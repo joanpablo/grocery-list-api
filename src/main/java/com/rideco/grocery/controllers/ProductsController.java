@@ -1,15 +1,14 @@
 package com.rideco.grocery.controllers;
 
 import com.rideco.grocery.models.Product;
+import com.rideco.grocery.models.RequestProductUpdate;
 import com.rideco.grocery.services.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.websocket.server.PathParam;
 import java.net.URI;
-import java.util.List;
 
 /**
  * Rest controller that handles http request for getting and saving Product data.
@@ -29,7 +28,7 @@ public class ProductsController {
      * @return the collection of all products.
      */
     @GetMapping
-    public List<Product> findAll() {
+    public Iterable<Product> findAll() {
         return this.productsService.findAll();
     }
 
@@ -56,16 +55,21 @@ public class ProductsController {
 
     /**
      * Updates a Product.
-     * @param product the product to update.
+     * @param productId the ID of the product to update
+     * @param requestProductUpdate the properties of the product to update.
      * @return an instance of the product updated.
      */
-    @PutMapping
-    public Product update(@RequestBody Product product) {
-        return this.productsService.update(product);
+    @PutMapping("/{id}")
+    public Product update(@PathVariable("id") Integer productId, @RequestBody RequestProductUpdate requestProductUpdate) {
+        Product product = this.productsService.findById(productId);
+        product.setName(requestProductUpdate.getName());
+        product.setDescription(requestProductUpdate.getDescription());
+
+        return this.productsService.save(product);
     }
 
-    @DeleteMapping
-    public void delete(@PathParam("id") Integer productId) {
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") Integer productId) {
         this.productsService.delete(productId);
     }
 }

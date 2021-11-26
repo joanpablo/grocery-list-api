@@ -1,11 +1,10 @@
 package com.rideco.grocery.services;
 
+import com.rideco.grocery.exceptions.ProductNotFoundException;
 import com.rideco.grocery.models.Product;
 import com.rideco.grocery.repositories.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * Service that exposes methods for saving and getting Product data.
@@ -21,35 +20,36 @@ public class ProductsService {
 
     /**
      * Gets all products.
+     *
      * @return a collection of all products.
      */
-    public List<Product> findAll() {
-        return this.productsRepository.findAll();
+    public Iterable<Product> findAll() {
+        return this.productsRepository.findAllByOrderByIdDesc();
     }
 
     /**
      * Saves a product.
-     * @param product the product to save.
-     * @return a new instance of the product saved with an ID.
+     * If the product exists it updates the product, otherwise it creates a new one and assign a new ID.
+     *
+     * @param product the product to create or update.
+     * @return a new instance of the saved product.
      */
     public Product save(Product product) {
         return this.productsRepository.save(product);
     }
 
     /**
-     * Updates a product.
-     * @param product the product to update.
-     * @return an instance of the product updated.
-     */
-    public Product update(Product product) {
-        return this.productsRepository.save(product);
-    }
-
-    /**
      * Deletes a product by its ID.
+     *
      * @param productId the ID of the product to delete.
      */
     public void delete(Integer productId) {
         this.productsRepository.deleteById(productId);
+    }
+
+    public Product findById(Integer productId) throws ProductNotFoundException {
+        return this.productsRepository
+                .findById(productId)
+                .orElseThrow(() -> new ProductNotFoundException(productId));
     }
 }
