@@ -43,8 +43,14 @@ public class ProductsService {
      *
      * @param productId the ID of the product to delete.
      */
-    public void delete(final Integer productId) {
+    public Product delete(final Integer productId) throws ProductNotFoundException {
+        Product product = this.productsRepository
+                .findById(productId)
+                .orElseThrow(() -> new ProductNotFoundException(productId));
+
         this.productsRepository.deleteById(productId);
+
+        return product;
     }
 
     public Product findById(final Integer productId) throws ProductNotFoundException {

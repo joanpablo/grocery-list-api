@@ -1,7 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.6.0'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+	id 'groovy'
 }
 
 group = 'com.rideco'
@@ -17,6 +17,11 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	implementation group: 'org.codehaus.groovy', name: 'groovy-json', version: '3.0.9'
+	implementation group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.9', ext: 'pom'
+	testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.1-M2-groovy-3.0'
+	testImplementation group: 'org.spockframework', name: 'spock-spring', version: '2.1-M2-groovy-3.0'
 }
 
 test {
