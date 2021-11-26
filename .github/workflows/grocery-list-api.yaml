@@ -20,6 +20,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+      - run: chmod +x ./gradlew
       - run: ./gradlew test
 
   build:
@@ -31,4 +32,5 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+      - run: chmod +x ./gradlew
       - run: ./gradlew build
