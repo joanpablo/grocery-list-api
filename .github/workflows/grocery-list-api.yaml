@@ -19,6 +19,7 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           java-version: '11'
+          distribution: 'adopt'
       - run: ./gradlew test
 
   build:
@@ -29,4 +30,5 @@ jobs:
       - uses: actions/setup-java@v2
         with:
           java-version: '11'
+          distribution: 'adopt'
       - run: ./gradlew build
