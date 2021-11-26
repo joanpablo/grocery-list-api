@@ -25,6 +25,7 @@ public class ProductsController {
 
     /**
      * Gets all products.
+     *
      * @return the collection of all products.
      */
     @GetMapping
@@ -34,7 +35,8 @@ public class ProductsController {
 
     /**
      * Saves a new product.
-     * @param product the product to save.
+     *
+     * @param product              the product to save.
      * @param uriComponentsBuilder an instance of a builder for building URI.
      * @return an instance of the created Product.
      */
@@ -55,7 +57,8 @@ public class ProductsController {
 
     /**
      * Updates a Product.
-     * @param productId the ID of the product to update
+     *
+     * @param productId            the ID of the product to update
      * @param requestProductUpdate the properties of the product to update.
      * @return an instance of the product updated.
      */
