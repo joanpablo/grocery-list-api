@@ -1,13 +1,14 @@
-FROM gradle:jdk11 as gradlebuilder
+FROM openjdk:11 as builder
 WORKDIR /app
 COPY gradlew .
 COPY gradle gradle
 COPY build.gradle .
 RUN chmod +x ./gradlew
-RUN ./gradlew dependencies
 COPY src src
+RUN ./gradlew dependencies
 RUN ./gradlew build
 
-FROM openjdk:8-jdk-alpine
-COPY --from=gradlebuilder /app/build/libs/gateway-app.jar .
-ENTRYPOINT ["java","-jar","/gateway-app.jar", "--spring.profiles.active=prod"]
+FROM openjdk:11
+COPY --from=builder /app/build/libs/grocery-list-api.jar .
+ENTRYPOINT ["java","-jar","/grocery-list-api.jar", "--spring.profiles.active=prod"]
+
