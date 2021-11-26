@@ -1,12 +1,9 @@
-FROM openjdk:11 as builder
+FROM gradle:jdk11 as builder
 WORKDIR /app
-COPY gradlew .
-COPY gradle gradle
-COPY build.gradle .
-RUN chmod +x ./gradlew
 COPY src src
-RUN ./gradlew dependencies
-RUN ./gradlew build
+COPY build.gradle .
+RUN gradle dependencies
+RUN gradle build
 
 FROM openjdk:11
 COPY --from=builder /app/build/libs/grocery-list-api.jar .
