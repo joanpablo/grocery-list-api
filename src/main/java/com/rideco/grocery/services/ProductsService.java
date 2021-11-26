@@ -44,4 +44,12 @@ public class ProductsService {
     public Product update(Product product) {
         return this.productsRepository.save(product);
     }
+
+    /**
+     * Deletes a product by its ID.
+     * @param productId the ID of the product to delete.
+     */
+    public void delete(Integer productId) {
+        this.productsRepository.deleteById(productId);
+    }
 }
