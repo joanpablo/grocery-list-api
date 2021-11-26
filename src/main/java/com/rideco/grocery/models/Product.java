@@ -1,5 +1,7 @@
 package com.rideco.grocery.models;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 
 /**
@@ -11,7 +13,10 @@ public class Product {
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id")
     private Integer id;
+
+    @NotNull
     private String name;
+
     private String description;
 
     /**

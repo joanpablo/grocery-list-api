@@ -14,7 +14,7 @@ public class ProductsService {
     private final ProductsRepository productsRepository;
 
     @Autowired
-    public ProductsService(ProductsRepository productsRepository) {
+    public ProductsService(final ProductsRepository productsRepository) {
         this.productsRepository = productsRepository;
     }
 
@@ -34,7 +34,7 @@ public class ProductsService {
      * @param product the product to create or update.
      * @return a new instance of the saved product.
      */
-    public Product save(Product product) {
+    public Product save(final Product product) {
         return this.productsRepository.save(product);
     }
 
@@ -43,11 +43,11 @@ public class ProductsService {
      *
      * @param productId the ID of the product to delete.
      */
-    public void delete(Integer productId) {
+    public void delete(final Integer productId) {
         this.productsRepository.deleteById(productId);
     }
 
-    public Product findById(Integer productId) throws ProductNotFoundException {
+    public Product findById(final Integer productId) throws ProductNotFoundException {
         return this.productsRepository
                 .findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException(productId));
