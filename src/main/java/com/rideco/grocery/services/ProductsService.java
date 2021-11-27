@@ -43,7 +43,7 @@ public class ProductsService {
      *
      * @param productId the ID of the product to delete.
      */
-    public Product delete(final Integer productId) throws ProductNotFoundException {
+    public Product delete(final Long productId) throws ProductNotFoundException {
         Product product = this.productsRepository
                 .findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException(productId));
@@ -53,7 +53,7 @@ public class ProductsService {
         return product;
     }
 
-    public Product findById(final Integer productId) throws ProductNotFoundException {
+    public Product findById(final Long productId) throws ProductNotFoundException {
         return this.productsRepository
                 .findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException(productId));

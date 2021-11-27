@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 /**
  * This represents a repository for accessing and saving Product data in database.
  */
-public interface ProductsRepository extends CrudRepository<Product, Integer> {
+public interface ProductsRepository extends CrudRepository<Product, Long> {
     Iterable<Product> findAllByOrderByIdDesc();
 }

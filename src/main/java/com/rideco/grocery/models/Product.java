@@ -12,7 +12,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @NotNull(message = "The name can not be null")
     @NotEmpty(message = "The name can not be empty")
@@ -24,7 +24,7 @@ public class Product {
      * Sets the ID of the product.
      * @param id the identifier of the product.
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -32,7 +32,7 @@ public class Product {
      * Gets the ID of the product.
      * @return the id of the product.
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 

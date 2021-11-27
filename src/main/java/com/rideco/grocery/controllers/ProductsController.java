@@ -67,7 +67,7 @@ public class ProductsController {
      * @return an instance of the product updated.
      */
     @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable("id") Integer productId, @Valid @RequestBody SaveProductRequest updateProductRequest) {
+    public Product updateProduct(@PathVariable("id") Long productId, @Valid @RequestBody SaveProductRequest updateProductRequest) {
         Product product = this.productsService.findById(productId);
         product.setName(updateProductRequest.getName());
         product.setDescription(updateProductRequest.getDescription());
@@ -76,7 +76,7 @@ public class ProductsController {
     }
 
     @DeleteMapping("/{id}")
-    public Product deleteProduct(@PathVariable("id") Integer productId) {
+    public Product deleteProduct(@PathVariable("id") Long productId) {
         return this.productsService.delete(productId);
     }
 }
