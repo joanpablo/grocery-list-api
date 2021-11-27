@@ -25,6 +25,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ProductResponse'
+              examples:
+                "A collection of products":
+                  value:
+                    [
+                      { id: "1", name: "Milk", description: "1 Bottle" },
+                      { id: "2", name: "Bananas", description: "1Kg" }
+                    ]
         500:
           $ref: '#/components/responses/InternalServerErrorResponse'
     post:
@@ -37,12 +44,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateProductRequest'
+              $ref: '#/components/schemas/SaveProductRequest'
             examples:
               "Creates a new Product":
                 value:
                   name: "Bananas"
-                  description: "Buy 1Kg of bananas"
+                  description: "Buy 1Kg"
               "Creates a new Product only with the name":
                 value:
                   name: "Cucumbers"
@@ -53,6 +60,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductResponse'
+              example:
+                id: "2"
+                name: "Bananas"
+                description: "Buy 1Kg"
         500:
           $ref: '#/components/responses/InternalServerErrorResponse'
   /products/{id}:
@@ -74,7 +85,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateProductRequest'
+              $ref: '#/components/schemas/SaveProductRequest'
             examples:
               "Update the name of a Product":
                 value:
@@ -113,6 +124,7 @@ paths:
       tags:
         - Product
       summary: Deletes a Product given its ID
+      operationId: deleteProduct
       parameters:
         - name: id
           in: path
@@ -121,7 +133,6 @@ paths:
           schema:
             type: integer
             format: int64
-      operationId: deleteProduct
       responses:
         200:
           description: "The Product was succefully deleted"
@@ -163,8 +174,8 @@ components:
         description:
           type: string
           description: "Some comments about the Product"
-    CreateProductRequest:
-      description: "Represents the input arguments to create a Product in the grocery list"
+    SaveProductRequest:
+      description: "Represents the input arguments to create or update a Product in the grocery list"
       properties:
         name:
           type: string
@@ -174,15 +185,6 @@ components:
           description: "Some comments about the Product"
       required:
         - "name"
-    UpdateProductRequest:
-      description: "Represents the request for updating a product"
-      properties:
-        name:
-          type: string
-          description: "The name of the product"
-        description:
-          type: string
-          description: "Some comments about the Product"
     ErrorResponse:
       description: "Represents the response of a failed action, and contains details about the failure."
       properties:

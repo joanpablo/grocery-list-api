@@ -33,7 +33,7 @@ public class ProductsController {
      * @return the collection of all products.
      */
     @GetMapping
-    public Iterable<Product> findAll() {
+    public Iterable<Product> findAllProducts() {
         return this.productsService.findAll();
     }
 
@@ -45,7 +45,7 @@ public class ProductsController {
      * @return an instance of the created Product.
      */
     @PostMapping
-    public ResponseEntity<Product> save(@Valid @RequestBody SaveProductRequest saveProductRequest, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<Product> saveProduct(@Valid @RequestBody SaveProductRequest saveProductRequest, UriComponentsBuilder uriComponentsBuilder) {
         Product savedProduct = this.productsService.save(this.productConverter.convert(saveProductRequest));
 
         URI location = uriComponentsBuilder
@@ -67,7 +67,7 @@ public class ProductsController {
      * @return an instance of the product updated.
      */
     @PutMapping("/{id}")
-    public Product update(@PathVariable("id") Integer productId, @Valid @RequestBody SaveProductRequest updateProductRequest) {
+    public Product updateProduct(@PathVariable("id") Integer productId, @Valid @RequestBody SaveProductRequest updateProductRequest) {
         Product product = this.productsService.findById(productId);
         product.setName(updateProductRequest.getName());
         product.setDescription(updateProductRequest.getDescription());
@@ -76,7 +76,7 @@ public class ProductsController {
     }
 
     @DeleteMapping("/{id}")
-    public Product delete(@PathVariable("id") Integer productId) {
+    public Product deleteProduct(@PathVariable("id") Integer productId) {
         return this.productsService.delete(productId);
     }
 }
