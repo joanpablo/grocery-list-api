@@ -28,7 +28,7 @@ You will find a complete report of the result os the tests in:
 build/reports/test/index.html
 ``` 
 
-The tests are written in [Spock Framework](https://spockframework.org/spock/docs/2.0/all_in_one.html) using the 
+The tests were written in [Spock Framework](https://spockframework.org/spock/docs/2.0/all_in_one.html) using the 
 language Groovy.  
 
 All test are located in:
