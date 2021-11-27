@@ -13,6 +13,10 @@ open-api-specs/grocery-list-api.yaml
 You can copy the content of the file and paste it in the [Swagger Editor](https://swagger.io/tools/swagger-editor/)
 to see the description of all services in the project.
 
+
+This is a screenshoot of the [Swagger Editor](https://swagger.io/tools/swagger-editor/) with the specifications
+![Screenshot 2021-11-27 211456](https://user-images.githubusercontent.com/37339180/143719472-a52253c7-9fa1-418c-9db5-02230c735d20.jpg)
+
 ## Build project
 ```shell
 ./gradlew build
