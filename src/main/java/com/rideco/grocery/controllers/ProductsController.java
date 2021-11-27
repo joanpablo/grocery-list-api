@@ -1,13 +1,15 @@
 package com.rideco.grocery.controllers;
 
+import com.rideco.grocery.converters.SaveProductRequestToProductConverter;
 import com.rideco.grocery.models.Product;
-import com.rideco.grocery.models.RequestProductUpdate;
+import com.rideco.grocery.models.SaveProductRequest;
 import com.rideco.grocery.services.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 /**
@@ -17,10 +19,12 @@ import java.net.URI;
 @RequestMapping("/products")
 public class ProductsController {
     private final ProductsService productsService;
+    private final SaveProductRequestToProductConverter productConverter;
 
     @Autowired
-    public ProductsController(ProductsService productsService) {
+    public ProductsController(ProductsService productsService, SaveProductRequestToProductConverter productConverter) {
         this.productsService = productsService;
+        this.productConverter = productConverter;
     }
 
     /**
@@ -36,17 +40,17 @@ public class ProductsController {
     /**
      * Saves a new product.
      *
-     * @param product              the product to save.
+     * @param saveProductRequest   the product to save.
      * @param uriComponentsBuilder an instance of a builder for building URI.
      * @return an instance of the created Product.
      */
     @PostMapping
-    public ResponseEntity<Product> save(@RequestBody Product product, UriComponentsBuilder uriComponentsBuilder) {
-        Product savedProduct = this.productsService.save(product);
+    public ResponseEntity<Product> save(@Valid @RequestBody SaveProductRequest saveProductRequest, UriComponentsBuilder uriComponentsBuilder) {
+        Product savedProduct = this.productsService.save(this.productConverter.convert(saveProductRequest));
 
         URI location = uriComponentsBuilder
                 .path("/products/")
-                .path(product.getId().toString())
+                .path(savedProduct.getId().toString())
                 .build()
                 .toUri();
 
@@ -59,14 +63,14 @@ public class ProductsController {
      * Updates a Product.
      *
      * @param productId            the ID of the product to update
-     * @param requestProductUpdate the properties of the product to update.
+     * @param updateProductRequest the properties of the product to update.
      * @return an instance of the product updated.
      */
     @PutMapping("/{id}")
-    public Product update(@PathVariable("id") Integer productId, @RequestBody RequestProductUpdate requestProductUpdate) {
+    public Product update(@PathVariable("id") Integer productId, @Valid @RequestBody SaveProductRequest updateProductRequest) {
         Product product = this.productsService.findById(productId);
-        product.setName(requestProductUpdate.getName());
-        product.setDescription(requestProductUpdate.getDescription());
+        product.setName(updateProductRequest.getName());
+        product.setDescription(updateProductRequest.getDescription());
 
         return this.productsService.save(product);
     }

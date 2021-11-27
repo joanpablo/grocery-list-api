@@ -25,6 +25,8 @@ public class GlobalAdvice {
             throw error;
         }
 
-        return new ErrorResponse(error.getMessage(), ErrorResponseCode.INTERNAL_SERVER_ERROR);
+        return new ErrorResponse()
+                .setErrorMessage(error.getMessage())
+                .setErrorCode(ErrorResponseCode.INTERNAL_SERVER_ERROR);
     }
 }

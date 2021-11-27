@@ -1,40 +1,16 @@
 package com.rideco.grocery.models;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 /**
- * Represents a Product of a grocery list.
+ * Represents an input for create or update a product.
  */
-@Entity
-public class Product {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id;
-
+public class SaveProductRequest {
     @NotNull(message = "The name can not be null")
     @NotEmpty(message = "The name can not be empty")
     private String name;
-
     private String description;
-
-    /**
-     * Sets the ID of the product.
-     * @param id the identifier of the product.
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * Gets the ID of the product.
-     * @return the id of the product.
-     */
-    public Integer getId() {
-        return id;
-    }
 
     /**
      * Gets the name of the product.
@@ -46,23 +22,23 @@ public class Product {
 
     /**
      * Gets the description of the product.
-     * @return the description of the product or null.
+     * @return the description of the product.
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * Sets the name of the product.
-     * @param name the new name of the product.
+     * Sets the name of the product to create.
+     * @param name the name of product.
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * Sets the description of the product.
-     * @param description the new description of the product.
+     * Sets the description of the product to create.
+     * @param description the description of product.
      */
     public void setDescription(String description) {
         this.description = description;
