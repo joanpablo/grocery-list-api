@@ -35,7 +35,7 @@ build/reports/test/index.html
 The tests were written in [Spock Framework](https://spockframework.org/spock/docs/2.0/all_in_one.html) using the 
 language Groovy.  
 
-All test are located in:
+All test are located [in](https://github.com/joanpablo/grocery-list-api/blob/master/src/test/groovy/com/rideco/grocery/controllers/ProductsControllerSpec.groovy):
 ```
 src/test/groovy/com/rideco/grocery/controllers/ProductsControllerSpec.groovy
 ```
