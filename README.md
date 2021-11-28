@@ -40,7 +40,7 @@ All test are located in:
 src/test/groovy/com/rideco/grocery/controllers/ProductsControllerSpec.groovy
 ```
 
-this is an example of a test:
+here is an example of one of several tests:
 ```groovy
 def "create a product with NULL name throws BAD_REQUEST response"() {
     given: "a request body with null name"
